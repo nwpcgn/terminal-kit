@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Press+Start+2P&family=Uncial+Antiqua&display=swap');
+@import 'tailwindcss';
+
+@theme {
+	--color-accent-50: #fffafe;
+	--color-accent-100: #fcf2fb;
+	--color-accent-200: #fadef5;
+	--color-accent-300: #f7cbee;
+	--color-accent-400: #f2a7e1;
+	--color-accent-500: #ee82cf;
+	--color-accent-600: #d66bb4;
+	--color-accent-700: #b3498c;
+	--color-accent-800: #8f2f65;
+	--color-accent-900: #6b1b44;
+	--color-accent-950: #450b26;
+}
