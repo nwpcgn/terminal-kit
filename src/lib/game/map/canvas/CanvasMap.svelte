@@ -1,8 +1,7 @@
 <script lang="ts">
 	import GridTile from './GridTile.svelte'
-
-	import { Canvas, Layer } from 'svelte-canvas'
 	import HeroTile from './HeroTile.svelte'
+	import { Canvas, Layer } from 'svelte-canvas'
 
 	let { value, tileSize, rows, cols, hero } = $props()
 
