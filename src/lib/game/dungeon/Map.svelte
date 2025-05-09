@@ -1,20 +1,13 @@
 <script lang="ts">
 	import '../scss/dungeon.scss'
 	import Loading from '../comp/Loading.svelte'
-	import CanvasMap from './canvas/CanvasMap.svelte'
-	import Grid from './Grid.svelte'
-
+	import Canvas from './Canvas.svelte'
 	import {
 		generateDungeon,
 		sleep,
 		randNum,
 		type Room
 	} from './dungeonGenerator'
-
-	let showCanvas = $state(true)
-	const toggle = () => {
-		showCanvas = !showCanvas
-	}
 
 	let frame = $state({ w: 0, h: 0 })
 	let cols = $state.raw(60)
@@ -23,9 +16,6 @@
 	let maxH = $derived(`${Math.floor((frame.h / rows) * scale)}`)
 	let maxW = $derived(`${Math.floor((frame.w / cols) * scale)}`)
 	let options = $derived({ tileSize: Math.min(maxH, maxW), cols, rows })
-	let gStyle = $derived(`--gg-gap: 1px; --gg-size: ${Math.min(maxH, maxW)}px;`)
-	let tsc = $derived(`${Math.floor((frame.h / 20) * scale)}`)
-
 	let grid: string[][] | null = $state()
 	let hero = $state({ x: 0, y: 0 })
 	let heroPos = $derived(
@@ -84,19 +74,9 @@
 		<nav class="grid gap-2 p-4">
 			<button onclick={recreate}>Create</button>
 			<div class="flex items-center justify-between gap-2">
-				<span>Rooms:</span>
-				<span>{rooms.length}</span>
-			</div>
-			<div class="flex items-center justify-between gap-2">
 				<span>Hero: </span>
 				<span>{heroPos}</span>
 			</div>
-			<h4>Render</h4>
-
-			<label class="flex items-center justify-between gap-2">
-				<input type="checkbox" bind:checked={showCanvas} />
-				<span>{showCanvas ? 'Canvas' : 'Dom'}</span>
-			</label>
 		</nav>
 	</div>
 </aside>
@@ -108,15 +88,7 @@
 		{#await promise}
 			<Loading></Loading>
 		{:then value}
-			{#if showCanvas}
-				<CanvasMap {value} {hero} {...options} tileSize={40}></CanvasMap>
-			{:else}
-				<Grid {value} {gStyle} {hero}></Grid>
-			{/if}
-		{:catch error}
-			<div class="text-center text-red-600">
-				<h2>Error</h2>
-			</div>
+			<Canvas {value} {hero} {...options} tileSize={40}></Canvas>
 		{/await}
 	</section>
 </article>

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import GridTile from './GridTile.svelte'
-	import HeroTile from './HeroTile.svelte'
+	import GridTile from './canvas/GridTile.svelte'
+	import HeroTile from './canvas/HeroTile.svelte'
 	import { Canvas, Layer } from 'svelte-canvas'
 	import { Spring } from 'svelte/motion'
 	let { value, rows, cols, hero, tileSize = 40 } = $props()
@@ -49,12 +49,14 @@
 		class="border-accent-500 border">
 		{#each value.tileMap.slice(Math.floor(camera.target.y), Math.floor(camera.target.y) + cameraHeight) as row, yOffset}
 			{#each row.slice(Math.floor(camera.target.x), Math.floor(camera.target.x) + cameraWidth) as col, xOffset}
-				<GridTile
-					onclick={tileclick}
-					x={xOffset}
-					y={yOffset}
-					{col}
-					{tileSize} />
+				{#if col !== '#'}
+					<GridTile
+						onclick={tileclick}
+						x={xOffset}
+						y={yOffset}
+						{col}
+						{tileSize} />
+				{/if}
 			{/each}
 		{/each}
 		<HeroTile

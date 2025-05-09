@@ -19,7 +19,7 @@
 	const atlas = {
 		'#': '#1a170f',
 		'.': color['4'],
-		'*': color['6'],
+		'*': color['4'],
 		D: color['5']
 	}
 
@@ -30,6 +30,13 @@
 	const render = ({ context }) => {
 		context.fillStyle = atlas[col]
 		context.fillRect(_x, _y, tileSize, tileSize)
+		if (col === '*') {
+			context.font = `40px sans-serif`
+			context.textAlign = 'center'
+			context.textBaseline = 'middle'
+			context.fillStyle = color['8']
+			context.fillText('*', _x + tileSize / 2, _y + tileSize / 2)
+		}
 	}
 </script>
 
